@@ -15,7 +15,7 @@ include("./db_connect.php");
 <body>
 <div class="register_form">
     <h1>ユーザー新規作成</h1>
-    <form action="./register.php" method="post">
+    <form action="./db_register.php" method="post">
         <p>
             ユーザーID: 
             <input type="text" name="username" required>
@@ -28,21 +28,17 @@ include("./db_connect.php");
             パスワード再入力: 
             <input type="password" name="password2" required>
         </p>
+
+        <?php
+            if(isset($register_error)){
+                echo "<p style=\"color: red;\">" . $register_error . "</p>";
+            }
+        ?>
+
         <p>
-            <input type="submit" value="ログイン">
+            <input type="submit" value="新規作成">
         </p>
     </form>
 </div>
 </body>
 </html>
-
-<?php
-    if(isset($_POST["username"]) and isset($_POST["password1"]) and isset($_POST["password2"])){
-        if($_POST["password1"] == $_POST["password2"]){
-            //問題なく入力された時の処理
-        }else{
-            echo "<p class=\"error\" style=\"color: red;\">パスワードが一致しません。</p>";
-        }
-    }
-    $db = null;
-?>

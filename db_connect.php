@@ -6,11 +6,9 @@ try{
         "21c1100017",
         "21c1100017"
     );
-    $db_connecting = true;
 }catch(PDOException $e){
-    print("Error: " . $e->getMessage());
-    $db_connecting = false;
-    die();
+    header("Location: ./error_db.php?error=".$e->getMessage());
+    exit();
 }
 
 ?>
