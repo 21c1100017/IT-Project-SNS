@@ -1,5 +1,6 @@
 <?php
 
+require_once("./config.php");
 require_once("./db_connect.php");
 
 if(isset($_POST["username"]) and isset($_POST["email"]) and isset($_POST["password1"]) and isset($_POST["password2"])){

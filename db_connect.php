@@ -2,7 +2,7 @@
 
 try{
     $db = new PDO(
-        "mysql:dbname=it_project_sns;host=melon-jp.net",
+        "mysql:dbname=it_project_sns;host=localhost",
         "21c1100017",
         "21c1100017"
     );
