@@ -3,7 +3,7 @@
 session_start();
 require_once("./config.php");
 
-if(isset($_SESSION["user_name"])){
+if(isset($_SESSION["info"])){
     header("Location: ./home.php");
     exit;
 }
@@ -12,9 +12,9 @@ $user_name = "";
 $error_login = "";
 
 if(isset($_POST["user_name"]) && isset($_POST["password"])){
-    if(login($_POST["user_name"], $_POST["password"]) != false){
+    if(($user_data = login($_POST["user_name"], $_POST["password"])) != false){
         session_regenerate_id(true);
-        $_SESSION["user_name"] = $row["user_name"];
+        $_SESSION["info"] = $user_data;
         header("Location: ./home.php");
         exit;
     }else{
@@ -27,6 +27,6 @@ if(isset($_POST["user_name"])){
 }
 
 $html = file_get_contents("template/login.html");
-$html = str_replace("{{user_name}}", $user_name, $html);
+$html = str_replace("{{user_name}}", htmlspecialchars($user_name, ENT_QUOTES, 'UTF-8'), $html);
 $html = str_replace("{{error_login}}", $error_login, $html);
 print($html);

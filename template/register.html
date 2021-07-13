@@ -11,25 +11,26 @@
     <h1>ユーザー新規作成</h1>
     <form action="./register.php" method="post">
         <p>
-            ユーザー名(アルファベット・数字・アンダーバーのみ): 
+            ユーザーID:
             <input type="text" name="user_name" value="{{user_name}}" required>
         </p>
+        <p style="color: red;">{{error_user_name}}</p>
         <p>
-            表示名: 
+            ニックネーム:
             <input type="text" name="nick_name"  value="{{nick_name}}" required>
         </p>
         <p>
-            メールアドレス: 
+            メールアドレス:
             <input type="text" name="email" value="{{email}}" required>
         </p>
         <p style="color: red;">{{error_email}}</p>
         <p>
-            パスワード: 
+            パスワード:
             <input type="password" name="password1" required>
         </p>
         <p style="color: red;">{{error_password1}}</p>
         <p>
-            パスワード再入力: 
+            パスワード再入力:
             <input type="password" name="password2" required>
         </p>
         <p style="color: red;">{{error_password2}}</p>
@@ -37,7 +38,7 @@
             <input type="submit" value="新規作成">
         </p>
     </form>
-    <a href="./index.php"><button>ログインする</button></a>
+    <a href="./index.php"><button>ログイン</button></a>
 </div>
 </body>
 </html>
