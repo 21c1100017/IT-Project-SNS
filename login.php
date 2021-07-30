@@ -26,7 +26,11 @@ if(isset($_POST["user_name"])){
     $user_name = $_POST["user_name"];
 }
 
-$html = file_get_contents("template/login.html");
-$html = str_replace("{{user_name}}", htmlspecialchars($user_name, ENT_QUOTES, 'UTF-8'), $html);
-$html = str_replace("{{error_login}}", $error_login, $html);
+$html = CreateHTML("login.html", [
+    "title" => "ログイン",
+    "head" => "",
+    "user_name" => htmlspecialchars($user_name, ENT_QUOTES, 'UTF-8'),
+    "erorr_login" => $error_login
+]);
+
 print($html);

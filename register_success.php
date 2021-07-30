@@ -2,5 +2,9 @@
 
 require_once("./config.php");
 
-$html = file_get_contents("template/register_success.html");
+$html = CreateHTML("register_success.html", [
+    "title" => "ユーザー作成完了",
+    "head" => ""
+]);
+
 print($html);

@@ -48,12 +48,16 @@ if(isset($_POST["email"])){
     $post_email = $_POST["email"];
 }
 
-$html = file_get_contents("template/register.html");
-$html = str_replace("{{user_name}}", htmlspecialchars($post_user_name, ENT_QUOTES, 'UTF-8'), $html);
-$html = str_replace("{{nick_name}}", htmlspecialchars($post_nick_name, ENT_QUOTES, 'UTF-8'), $html);
-$html = str_replace("{{email}}", htmlspecialchars($post_email, ENT_QUOTES, 'UTF-8'), $html);
-$html = str_replace("{{error_user_name}}", $error["user_name"], $html);
-$html = str_replace("{{error_email}}", $error["email"], $html);
-$html = str_replace("{{error_password1}}", $error["password1"], $html);
-$html = str_replace("{{error_password2}}", $error["password2"], $html);
+$html = CreateHTML("register.html", [
+    "title" => "ユーザー新規作成",
+    "head" => "",
+    "user_name" => htmlspecialchars($post_user_name, ENT_QUOTES, 'UTF-8'),
+    "nick_name" => htmlspecialchars($post_nick_name, ENT_QUOTES, 'UTF-8'),
+    "email" => htmlspecialchars($post_email, ENT_QUOTES, 'UTF-8'),
+    "error_user_name" => $error["user_name"],
+    "error_email" => $error["email"],
+    "error_password1" => $error["password1"],
+    "error_password2" => $error["password2"]
+]);
+
 print($html);
