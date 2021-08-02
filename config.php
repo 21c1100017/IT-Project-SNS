@@ -1,12 +1,18 @@
 <?php
 
+if(!defined("allow_access_config")){
+    header("Location: ./index.php");
+}
+
 //ini_set('display_errors', 0);
+define("allow_access_db_init", true);
 require_once("./db_init.php");
 
 $main_title = "簡単なSNS";
 
 function CreateHTML(string $filename, array $blocks){
 
+    global $main_title;
     $layout = file_get_contents("./template/layout.html");
     $html = file_get_contents("./template/".$filename);
     $html = str_replace("{{content}}", $html, $layout);

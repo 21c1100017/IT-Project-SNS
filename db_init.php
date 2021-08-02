@@ -1,5 +1,9 @@
 <?php
 
+if(!defined("allow_access_db_init")){
+    header("Location: ./index.php");
+}
+
 $db = null;
 
 try{

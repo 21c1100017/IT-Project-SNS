@@ -1,34 +1,35 @@
 
 <div class="register_form">
     <h1>ユーザー新規作成</h1>
+    <p style="color: red;">{{error_csrf_token}}</p>
     <form action="./register.php" method="post">
-        <p>
-            ユーザーID:
+        <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+        <div>
+            <label>ユーザーID:</label>
             <input type="text" name="user_name" value="{{user_name}}" required>
-        </p>
-        <p style="color: red;">{{error_user_name}}</p>
-        <p>
-            ニックネーム:
+            <p style="color: red;">{{error_user_name}}</p>
+        </div>
+        <div>
+            <label>ニックネーム:</label>
             <input type="text" name="nick_name"  value="{{nick_name}}" required>
-        </p>
-        <p>
-            メールアドレス:
+            <p></p>
+        </div>
+        <div>
+            <label>メールアドレス:</label>
             <input type="text" name="email" value="{{email}}" required>
-        </p>
-        <p style="color: red;">{{error_email}}</p>
-        <p>
-            パスワード:
+            <p style="color: red;">{{error_email}}</p>
+        </div>
+        <div>
+            <label>パスワード:</label>
             <input type="password" name="password1" required>
-        </p>
-        <p style="color: red;">{{error_password1}}</p>
-        <p>
-            パスワード再入力:
+            <p style="color: red;">{{error_password1}}</p>
+        </div>
+        <div>
+            <label>パスワード再入力:</label>
             <input type="password" name="password2" required>
-        </p>
-        <p style="color: red;">{{error_password2}}</p>
-        <p>
-            <input type="submit" value="新規作成">
-        </p>
+            <p style="color: red;">{{error_password2}}</p>
+        </div>
+        <input type="submit" value="新規作成">
     </form>
     <a href="./index.php"><button>ログイン</button></a>
 </div>
