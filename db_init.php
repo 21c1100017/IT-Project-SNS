@@ -8,7 +8,7 @@ $db = null;
 
 try{
     $db = new PDO(
-        "mysql:dbname=it_project_sns;host=melonkun.jp",
+        "mysql:dbname=it_project_sns;host=localhost",
         "21c1100017",
         "21c1100017"
     );

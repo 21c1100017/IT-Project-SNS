@@ -4,7 +4,7 @@ session_start();
 define("allow_access_config", true);
 require_once("./config.php");
 
-if(!isset($_SESSION["info"])){
+if(!isset($_SESSION["user_data"])){
     header("Location: ./login.php");
     exit;
 }

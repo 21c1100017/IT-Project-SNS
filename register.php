@@ -56,7 +56,7 @@ if(isset($_POST["email"])){
     $post_email = $_POST["email"];
 }
 
-$html = CreateHTML("register.html", [
+$html = create_html("register.html", [
     "title" => "ユーザー新規作成",
     "head" => "",
     "csrf_token" => $csrf_token,
