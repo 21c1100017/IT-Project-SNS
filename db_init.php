@@ -43,7 +43,9 @@ function login(string $user_name, string $password) {
 }
 
 # 新規ユーザーを登録します。
-# 返り値: なし
+# 返り値
+#   成功した: True
+#   失敗した: String(エラーメッセージ)
 function register(string $user_name, string $nick_name, string $password, string $email) {
     global $db;
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -60,17 +62,17 @@ function register(string $user_name, string $nick_name, string $password, string
             $time,
             $time
         ]);
-    }catch(\Exception $e){
-        echo $e->getMessage();
-        exit;
+    }catch(\PDOException $e){
+        return $e->getMessage();
     }
+    return true;
 }
 
-# ユーザー名の重複チェックをします。
+# ユーザー名が存在するかチェックをします。
 # 返り値
-#   重複: True
-#   重複なし: False
-function userIdDuplicationCheck(string $name) {
+#   存在する: True
+#   存在しない: False
+function is_user_id_exists(string $name) {
     global $db;
     try{
         $stmt = $db->prepare("SELECT `user_name` FROM `users` WHERE `user_name` LIKE ?");
@@ -83,11 +85,11 @@ function userIdDuplicationCheck(string $name) {
     return isset($row["user_name"]);
 }
 
-# メールアドレスの重複チェックをします。
+# メールアドレスの存在チェックをします。
 # 返り値
-#   重複: True
-#   重複なし: False
-function emailDuplicationCheck(string $email) {
+#   存在する: True
+#   存在しない: False
+function is_email_exists(string $email) {
     global $db;
     try{
         $stmt = $db->prepare("SELECT `email` FROM `users` WHERE `email` LIKE ?");
