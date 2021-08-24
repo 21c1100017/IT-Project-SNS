@@ -1,35 +1,34 @@
-
 <div class="register_form">
     <h1>ユーザー新規作成</h1>
     <p style="color: red;">{{error_csrf_token}}</p>
     <form action="./register.php" method="post">
         {{csrf_token}}
-        <div>
-            <label>ユーザーID:</label>
-            <input type="text" name="user_name" value="{{user_name}}" required>
+        <div class="mb-3">
+            <label class="form-label">ユーザーID:</label>
+            <input type="text" class="form-control" name="user_name" value="{{user_name}}" required>
             <p style="color: red;">{{error_user_name}}</p>
         </div>
-        <div>
-            <label>ニックネーム:</label>
-            <input type="text" name="nick_name"  value="{{nick_name}}" required>
+        <div class="mb-3">
+            <label class="form-label">ニックネーム:</label>
+            <input type="text" class="form-control" name="nick_name"  value="{{nick_name}}" required>
             <p></p>
         </div>
-        <div>
-            <label>メールアドレス:</label>
-            <input type="text" name="email" value="{{email}}" required>
+        <div class="mb-3">
+            <label class="form-label">メールアドレス:</label>
+            <input type="text" class="form-control" name="email" value="{{email}}" required>
             <p style="color: red;">{{error_email}}</p>
         </div>
-        <div>
-            <label>パスワード:</label>
-            <input type="password" name="password1" required>
+        <div class="mb-3">
+            <label class="form-label">パスワード:</label>
+            <input type="password" class="form-control" name="password1" required>
             <p style="color: red;">{{error_password1}}</p>
         </div>
-        <div>
-            <label>パスワード再入力:</label>
-            <input type="password" name="password2" required>
+        <div class="mb-3">
+            <label class="form-label">パスワード再入力:</label>
+            <input type="password" class="form-control" name="password2" required>
             <p style="color: red;">{{error_password2}}</p>
         </div>
-        <input type="submit" value="新規作成">
+        <button type="submit" class="btn btn-primary">新規作成</button>
     </form>
-    <a href="./index.php"><button>ログイン</button></a>
+    <a href="./index.php"><button class="btn btn-primary">ログイン</button></a>
 </div>

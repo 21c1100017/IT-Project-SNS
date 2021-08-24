@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 define("allow_access_config", true);
 require_once("./config.php");
 

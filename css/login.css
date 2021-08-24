@@ -1,7 +1,11 @@
 .login_form {
-    text-align: center;
+    margin: 30px;
 }
 
 .login_form h1 {
     text-align: center;
+}
+
+.login_form button {
+    margin: 5px;
 }

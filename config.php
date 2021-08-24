@@ -5,6 +5,7 @@ if(!defined("allow_access_config")){
 }
 
 //ini_set('display_errors', 0);
+session_start();
 define("allow_access_db_init", true);
 require_once("./db_init.php");
 
@@ -23,6 +24,7 @@ function create_html(string $filename, array $blocks) : string {
         $title = $main_title." | ".$blocks["title"];
     }
 
+    $html = str_replace("{{main_title}}", $main_title, $html);
     $html = str_replace("{{title}}", $title, $html);
     $html = str_replace("{{head}}", $blocks["head"], $html);
 

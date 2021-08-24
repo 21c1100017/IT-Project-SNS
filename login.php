@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 define("allow_access_config", true);
 require_once("./config.php");
 
@@ -33,7 +32,7 @@ if(isset($_POST["user_name"])){
 
 $html = create_html("login.html", [
     "title" => "ログイン",
-    "head" => "",
+    "head" => "<link rel=\"stylesheet\" href=\"./css/login.css\">",
     "user_name" => htmlspecialchars($user_name, ENT_QUOTES, 'UTF-8'),
     "error_login" => $error_login
 ]);

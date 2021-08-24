@@ -1,0 +1,11 @@
+.register_form {
+    margin: 30px;
+}
+
+.register_form h1 {
+    text-align: center;
+}
+
+.register_form button {
+    margin: 5px;
+}
