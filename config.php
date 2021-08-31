@@ -48,6 +48,17 @@ function create_html(string $filename, array $blocks) : string {
 
 }
 
+function create_postbox(string $filename, array $blocks) : string {
+    $html = file_get_contents("./template/".$filename);
+    foreach($blocks as $block_name => $block_value){
+        if($block_name == "title" || $block_name == "head"){
+            continue;
+        }
+        $html = str_replace("{{".$block_name."}}", $block_value, $html);
+    }
+    return $html;
+}
+
 function generate_csrf_token() : string {
     $token_byte = openssl_random_pseudo_bytes(16);
     $csrf_token = bin2hex($token_byte);

@@ -17,14 +17,12 @@ foreach(get_timeline(10) as $data){
     }else{
         $icon_path = $user["profile_icon_path"];
     }
-    $timeline = $timeline . create_html("post_box.html", [
-        "title" => "",
-        "head" => "",
+    $timeline = $timeline . create_postbox("post_box.html", [
         "icon_path" => $icon_path,
-        "nick_name" => $user["user_nick_name"],
-        "user_name" => $user["user_name"],
+        "nick_name" => htmlspecialchars($user["user_nick_name"], ENT_QUOTES, 'UTF-8'),
+        "user_name" => htmlspecialchars($user["user_name"], ENT_QUOTES, 'UTF-8'),
         "created_at" => $data["created_at"],
-        "content" => $data["post_content"]
+        "content" => htmlspecialchars($data["post_content"], ENT_QUOTES, 'UTF-8')
     ]);
 }
 

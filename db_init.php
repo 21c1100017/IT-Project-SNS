@@ -10,9 +10,13 @@ try{
     $db = new PDO(
         "mysql:dbname=it_project_sns;host=localhost",
         "21c1100017",
-        "21c1100017"
+        "21c1100017",
+        [
+            \PDO::ATTR_EMULATE_PREPARES => false,
+            \PDO::MYSQL_ATTR_MULTI_STATEMENTS => false
+        ]
     );
-}catch(PDOException $e){
+}catch(\PDOException $e){
     header("Location: ./error_db.php?error=".$e->getMessage());
     exit();
 }
@@ -25,8 +29,8 @@ try{
         `post_id` BIGINT(20) UNSIGNED ZEROFILL NOT NULL,
         `user_id` BIGINT(20) UNSIGNED ZEROFILL NOT NULL,
         `coment_content` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-        `created_at` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
-	    `deleted_at` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
+        `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	    `deleted_at` DATETIME DEFAULT NULL,
         PRIMARY KEY (`comment_id`) USING BTREE
         )
         COLLATE='utf8mb4_general_ci'
@@ -35,7 +39,7 @@ try{
     $db->query("CREATE TABLE IF NOT EXISTS `error_logs` (
         `id` INT(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
         `error_message` TEXT NOT NULL COLLATE 'utf8mb4_general_ci',
-        `created_at` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
+        `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (`id`) USING BTREE
         )
         COLLATE='utf8mb4_general_ci'
@@ -45,8 +49,8 @@ try{
         `post_id` BIGINT(20) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
         `user_id` BIGINT(20) UNSIGNED ZEROFILL NOT NULL,
         `post_content` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-        `created_at` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
-	    `deleted_at` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
+        `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	    `deleted_at` DATETIME DEFAULT NULL,
         PRIMARY KEY (`post_id`) USING BTREE
         )
         COLLATE='utf8mb4_general_ci'
@@ -59,8 +63,8 @@ try{
         `encrypted_password` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
         `email` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
         `profile_icon_path` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
-        `created_at` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
-	    `deleted_at` TIMESTAMP NOT NULL DEFAULT current_timestamp(),
+        `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	    `deleted_at` DATETIME DEFAULT NULL,
         PRIMARY KEY (`user_id`) USING BTREE,
         UNIQUE INDEX `UNIQUE` (`user_name`, `email`, `profile_icon_path`) USING BTREE
         )
@@ -183,13 +187,13 @@ function get_timeline(int $amount){
     return $row;
 }
 
-function get_user_from_id(string $user_id){
+function get_user_from_id(int $user_id){
     global $db;
     try{
         $stmt = $db->prepare(
-            "SELECT * FROM `users` WHERE `user_id` LIKE :user_id"
+            "SELECT * FROM `users` WHERE `user_id` = :user_id"
         );
-        $stmt->bindValue(":user_id", $user_id);
+        $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
     }catch(\PDOEXception $e){
