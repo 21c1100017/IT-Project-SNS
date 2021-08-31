@@ -17,7 +17,12 @@ try{
         ]
     );
 }catch(\PDOException $e){
-    header("Location: ./error_db.php?error=".$e->getMessage());
+    $html = create_html("error_db.html", [
+        "title" => "DB接続エラー",
+        "head" => "",
+        "error" => $e->getMessage()
+    ]);
+    print($html);
     exit();
 }
 
