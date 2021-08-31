@@ -18,15 +18,20 @@ function create_html(string $filename, array $blocks) : string {
     $html = file_get_contents("./template/".$filename);
     $html = str_replace("{{content}}", $html, $layout);
 
-    if($blocks["title"] == ""){
-        $title = $main_title;
-    }else{
-        $title = $main_title." | ".$blocks["title"];
+    if(isset($blocks["title"])){
+        if($blocks["title"] == ""){
+            $title = $main_title;
+        }else{
+            $title = $main_title." | ".$blocks["title"];
+        }
+        $html = str_replace("{{title}}", $title, $html);
+    }
+
+    if(isset($blocks["head"])){
+        $html = str_replace("{{head}}", $blocks["head"], $html);
     }
 
     $html = str_replace("{{main_title}}", $main_title, $html);
-    $html = str_replace("{{title}}", $title, $html);
-    $html = str_replace("{{head}}", $blocks["head"], $html);
 
     foreach($blocks as $block_name => $block_value){
         if($block_name == "title" || $block_name == "head"){
