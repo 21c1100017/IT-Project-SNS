@@ -28,57 +28,6 @@ try{
 
 date_default_timezone_set("Asia/Tokyo");
 
-try{
-    $db->query("CREATE TABLE IF NOT EXISTS `comments` (
-        `comment_id` BIGINT(20) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
-        `post_id` BIGINT(20) UNSIGNED ZEROFILL NOT NULL,
-        `user_id` BIGINT(20) UNSIGNED ZEROFILL NOT NULL,
-        `coment_content` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-        `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	    `deleted_at` DATETIME DEFAULT NULL,
-        PRIMARY KEY (`comment_id`) USING BTREE
-        )
-        COLLATE='utf8mb4_general_ci'
-        ENGINE=InnoDB;"
-    );
-    $db->query("CREATE TABLE IF NOT EXISTS `error_logs` (
-        `id` INT(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
-        `error_message` TEXT NOT NULL COLLATE 'utf8mb4_general_ci',
-        `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY (`id`) USING BTREE
-        )
-        COLLATE='utf8mb4_general_ci'
-        ENGINE=InnoDB;"
-    );
-    $db->query("CREATE TABLE IF NOT EXISTS `posts` (
-        `post_id` BIGINT(20) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
-        `user_id` BIGINT(20) UNSIGNED ZEROFILL NOT NULL,
-        `post_content` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-        `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	    `deleted_at` DATETIME DEFAULT NULL,
-        PRIMARY KEY (`post_id`) USING BTREE
-        )
-        COLLATE='utf8mb4_general_ci'
-        ENGINE=InnoDB;"
-    );
-    $db->query("CREATE TABLE IF NOT EXISTS `users` (
-        `user_id` BIGINT(20) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
-        `user_name` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-        `user_nick_name` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-        `encrypted_password` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-        `email` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-        `profile_icon_path` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
-        `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	    `deleted_at` DATETIME DEFAULT NULL,
-        PRIMARY KEY (`user_id`) USING BTREE,
-        UNIQUE INDEX `UNIQUE` (`user_name`, `email`, `profile_icon_path`) USING BTREE
-        )
-        COLLATE='utf8mb4_general_ci'
-        ENGINE=InnoDB;");
-}catch(\PDOException $e){
-
-}
-
 # 通常ログイン処理
 # 返り値
 #   成功: ユーザー情報
