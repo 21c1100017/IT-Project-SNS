@@ -55,9 +55,9 @@ if(isset($_POST["email"])){
     $post_email = $_POST["email"];
 }
 
-$html = create_html("register.html", [
-    "title" => "ユーザー新規作成",
-    "head" => "<link rel=\"stylesheet\" href=\"./css/register.css\">",
+$html = create_html("register.html", "ユーザー新規作成", [
+    "<link rel=\"stylesheet\" href=\"./css/register.css\">"
+], [
     "user_name" => htmlspecialchars($post_user_name, ENT_QUOTES, 'UTF-8'),
     "nick_name" => htmlspecialchars($post_nick_name, ENT_QUOTES, 'UTF-8'),
     "email" => htmlspecialchars($post_email, ENT_QUOTES, 'UTF-8'),

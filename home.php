@@ -26,9 +26,9 @@ foreach(get_timeline(10) as $data){
     ]);
 }
 
-$html = create_html("home.html", [
-    "title" => "ホーム",
-    "head" => "<link rel=\"stylesheet\" href=\"./css/home.css\">",
+$html = create_html("home.html", "ホーム", [
+    "<link rel=\"stylesheet\" href=\"./css/home.css\">"
+], [
     "user_nick_name" => htmlspecialchars($_SESSION["user_data"]["user_nick_name"], ENT_QUOTES, 'UTF-8'),
     "timeline" => $timeline
 ]);

@@ -9,39 +9,35 @@ session_start();
 define("allow_access_db_init", true);
 require_once("./db_init.php");
 
-$main_title = "簡単なSNS";
+$title = "簡単なSNS";
 
-function create_html(string $filename, array $blocks) : string {
+function create_html(string $file_name, string $sub_title = "", array $heads = [], array $blocks = []) : string {
 
-    global $main_title;
-    $layout = file_get_contents("./template/layout.html");
-    $html = file_get_contents("./template/".$filename);
-    $html = str_replace("{{content}}", $html, $layout);
+    //global $title;
+    $base = file_get_contents("./template/base.html");
+    $html = file_get_contents("./template/" . $file_name);
+    $html = str_replace("{{content}}", $html, $base);
+    $head_html = "";
+    $sub_title = "";
 
-    if(isset($blocks["title"])){
-        if($blocks["title"] == ""){
-            $title = $main_title;
-        }else{
-            $title = $main_title." | ".$blocks["title"];
-        }
-        $html = str_replace("{{title}}", $title, $html);
+    if($sub_title != ""){
+        $sub_title = $sub_title . " | ";
     }
 
-    if(isset($blocks["head"])){
-        $html = str_replace("{{head}}", $blocks["head"], $html);
+    $html = str_replace("{{title}}", $sub_title . $title, $html);
+
+    foreach($heads as $head){
+        $head_html = $head_html . $head;
     }
 
-    $html = str_replace("{{main_title}}", $main_title, $html);
+    $html = str_replace("{{head}}", $head_html, $html);
 
-    foreach($blocks as $block_name => $block_value){
-        if($block_name == "title" || $block_name == "head"){
-            continue;
-        }
-        $html = str_replace("{{".$block_name."}}", $block_value, $html);
+    foreach($blocks as $block_name => $block_content){
+        $html = str_replace("{{" . $block_name . "}}", $block_content, $html);
     }
 
     if(strpos($html, "{{csrf_token}}") != false){
-        $html = str_replace("{{csrf_token}}", "<input type=\"hidden\" name=\"csrf_token\" value=".generate_csrf_token().">", $html);
+        $html = str_replace("{{csrf_token}}", "<input type=\"hidden\" name=\"csrf_token\" value=" . generate_csrf_token() . ">", $html);
     }
 
     return $html;
@@ -54,7 +50,7 @@ function create_postbox(string $filename, array $blocks) : string {
         if($block_name == "title" || $block_name == "head"){
             continue;
         }
-        $html = str_replace("{{".$block_name."}}", $block_value, $html);
+        $html = str_replace("{{" . $block_name . "}}", $block_value, $html);
     }
     return $html;
 }

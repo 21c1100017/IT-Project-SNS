@@ -30,9 +30,9 @@ if(isset($_POST["user_name"])){
     $user_name = $_POST["user_name"];
 }
 
-$html = create_html("login.html", [
-    "title" => "ログイン",
-    "head" => "<link rel=\"stylesheet\" href=\"./css/login.css\">",
+$html = create_html("login.html", "ログイン", [
+    "<link rel=\"stylesheet\" href=\"./css/login.css\">"
+], [
     "user_name" => htmlspecialchars($user_name, ENT_QUOTES, 'UTF-8'),
     "error_login" => $error_login
 ]);
