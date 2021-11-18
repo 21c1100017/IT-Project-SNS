@@ -13,7 +13,7 @@ $title = "簡単なSNS";
 
 function create_html(string $file_name, string $sub_title = "", array $heads = [], array $blocks = []) : string {
 
-    //global $title;
+    global $title;
     $base = file_get_contents("./template/base.html");
     $html = file_get_contents("./template/" . $file_name);
     $html = str_replace("{{content}}", $html, $base);
