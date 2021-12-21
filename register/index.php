@@ -1,7 +1,7 @@
 <?php
 
 define("allow_access_config", true);
-require_once("./config.php");
+require_once("../config.php");
 
 $error = [
     "csrf_token" => "",
@@ -38,7 +38,7 @@ if(isset($_POST["user_name"]) and isset($_POST["nick_name"]) and isset($_POST["e
     }
     if($error["csrf_token"] == "" && $error["user_name"] == "" && $error["password1"] == "" && $error["password2"] == "" && $error["email"] == ""){
         register_user($_POST["user_name"], $_POST["nick_name"], $_POST["password1"], $_POST["email"]);
-        header("Location: ./register_success.php");
+        header("Location: ./success.php");
         exit;
     }
 }
@@ -56,7 +56,7 @@ if(isset($_POST["email"])){
 }
 
 $html = create_html("register.html", "ユーザー新規作成", [
-    "<link rel=\"stylesheet\" href=\"./css/register.css\">"
+    "<link rel=\"stylesheet\" href=\"../css/register.css\">"
 ], [
     "user_name" => htmlspecialchars($post_user_name, ENT_QUOTES, 'UTF-8'),
     "nick_name" => htmlspecialchars($post_nick_name, ENT_QUOTES, 'UTF-8'),

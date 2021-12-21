@@ -1,5 +1,9 @@
 <?php
 
+if(!defined("allow_access_db_functions")){
+    header("Location: ./index.php");
+}
+
 # 通常ログイン処理
 # 返り値
 #   成功: ユーザー情報
