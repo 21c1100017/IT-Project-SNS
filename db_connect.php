@@ -1,4 +1,5 @@
 <?php
+# /db_connect.php
 
 if(!defined("allow_access_db_connect")){
     header("Location: ./index.php");
