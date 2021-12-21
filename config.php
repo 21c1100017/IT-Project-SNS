@@ -1,6 +1,6 @@
 <?php
 
-$root = "http://localhost/IT-Project-SNS/";
+$root = "/IT-Project-SNS/";
 
 if(!defined("allow_access_config")){
     header("Location: ./index.php");
@@ -9,17 +9,17 @@ if(!defined("allow_access_config")){
 //ini_set('display_errors', 0);
 session_start();
 define("allow_access_db_connect", true);
-require_once("./db_connect.php");
+require_once(__DIR__ . "/db_connect.php");
 define("allow_access_db_functions", true);
-require_once("./db_functions.php");
+require_once(__DIR__ . "/db_functions.php");
 
 $title = "簡単なSNS";
 
 function create_html(string $file_name, string $sub_title = "", array $heads = [], array $blocks = []) : string {
 
     global $title;
-    $base = file_get_contents("./template/base.html");
-    $html = file_get_contents("./template/" . $file_name);
+    $base = file_get_contents(__DIR__ . "/template/base.html");
+    $html = file_get_contents(__DIR__ . "/template/" . $file_name);
     $html = str_replace("{{content}}", $html, $base);
     $head_html = "";
     $sub_title = "";
@@ -49,7 +49,7 @@ function create_html(string $file_name, string $sub_title = "", array $heads = [
 }
 
 function create_postbox(string $filename, array $blocks) : string {
-    $html = file_get_contents("./template/".$filename);
+    $html = file_get_contents(__DIR__ . "/template/".$filename);
     foreach($blocks as $block_name => $block_value){
         if($block_name == "title" || $block_name == "head"){
             continue;
