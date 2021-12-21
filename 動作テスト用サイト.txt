@@ -1,7 +1,0 @@
-URL:
-it-project.melonkun.jp
-
-Basic認証:
-  ユーザー名: itproject
-  パスワード: 21c1100017
-  
