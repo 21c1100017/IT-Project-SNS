@@ -1,10 +1,6 @@
 <?php
 # /db_functions.php
 
-if(!defined("allow_access_functions")){
-    header("Location: ./index.php");
-}
-
 function create_html(string $file_name, string $sub_title = "", array $heads = [], array $blocks = []) : string {
 
     global $title;
